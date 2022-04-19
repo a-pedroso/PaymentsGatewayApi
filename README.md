@@ -29,6 +29,7 @@ docker-compose up
 ```
 
 ## Useful Links after running docker compose up
+execute some actions on API in order to have some metrics, logs and tracing.
 
 | WebPage       | Link          | Login         | Password      |
 | ------------- |---------------|:-------------:|:-------------:|
@@ -37,7 +38,7 @@ docker-compose up
 | API - Health | https://localhost:5001/health       | - | - |
 | Grafana       | http://localhost:3000/ | admin | admin |
 | Grafana - Metrics Dashboard       | http://localhost:3000/d/zyAf4i4Zz2/prometheus-net | - | - |
-| Grafana - Loki Logs      | http://localhost:3000/explore?orgId=1&left=%7B%22datasource%22:%22Loki%22,%22queries%22:%5B%7B%22refId%22:%22A%22,%22expr%22:%22%7BApplicationName%3D%5C%22payments-gateway-webapi%5C%22%7D%22,%22queryType%22:%22range%22%7D%5D,%22range%22:%7B%22from%22:%22now-1h%22,%22to%22:%22now%22%7D%7D | - | - |
+| Grafana - Loki Logs      | [here](http://localhost:3000/explore?orgId=1&left=%7B%22datasource%22:%22Loki%22,%22queries%22:%5B%7B%22refId%22:%22A%22,%22expr%22:%22%7BApplicationName%3D%5C%22payments-gateway-webapi%5C%22%7D%22,%22queryType%22:%22range%22%7D%5D,%22range%22:%7B%22from%22:%22now-1h%22,%22to%22:%22now%22%7D%7D) | - | - |
 | Jaeger        | http://localhost:16686/ | - | - |
 | Prometheus    | http://localhost:9090/ | - | - |
 | Seq           | http://localhost:5341/ | - | - |
