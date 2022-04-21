@@ -1,10 +1,10 @@
 ## Run Application
 Tested on Windows 11 with .NET 6 SDK
 <br/>
-On Visual Studio, hit Run from Docker Compose Project
+On Visual Studio, with Docker Compose project as starting project, hit Run from Docker Compose Project
 Or at Solution Folder, on your shell of your choice type
 ```text
-docker-compose up
+docker compose up --build
 ```
 
 ## Sample JSON to create a payment

@@ -11,6 +11,7 @@ services:
       context: .
       dockerfile: src/Presentation/WebApi/Dockerfile
     environment:
+      - ASPNETCORE_ENVIRONMENT=Development
       - "UseInMemoryDatabase=false"
       - "RunEFCoreMigrations=true"
       - "ForwardHeadersEnabled=true"
@@ -93,7 +94,6 @@ services:
       - ACCEPT_EULA=Y
     ports:
       - "5341:80"
-      #- "5341:5341"
     volumes:
       - seq-data:/data
     networks:
@@ -101,7 +101,7 @@ services:
 
   webapi-loki:
     container_name: "webapi-loki"
-    image: grafana/loki:main-7b214e2
+    image: grafana/loki
     ports:
       - "3100:3100"
     command: -config.file=/etc/loki/local-config.yaml

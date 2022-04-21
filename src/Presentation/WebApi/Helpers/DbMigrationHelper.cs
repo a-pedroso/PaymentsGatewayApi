@@ -10,13 +10,8 @@ public static class DbMigrationHelper<TdbContext>
 {
     static int tries;
 
-    public static async Task EnsureDatabaseMigratedAsync(IServiceScope scope, Exception? exception = null)
+    public static async Task EnsureDatabaseMigratedAsync(IServiceScope scope)
     {
-        if (tries == 4 && exception is not null)
-        {
-            throw exception;
-        }
-
         try
         {
             // wait some seconds to make sure the mssql is already up
@@ -26,9 +21,14 @@ public static class DbMigrationHelper<TdbContext>
             using var context = scope.ServiceProvider.GetRequiredService<TdbContext>();
             await context.Database.MigrateAsync();
         }
-        catch (Exception ex)
+        catch
         {
-            await EnsureDatabaseMigratedAsync(scope, ex);
+            if (tries == 4)
+            {
+                throw;
+            }
+
+            await EnsureDatabaseMigratedAsync(scope);
         }
     }
 }
