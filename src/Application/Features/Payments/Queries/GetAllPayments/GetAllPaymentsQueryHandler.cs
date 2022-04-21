@@ -1,7 +1,7 @@
 ﻿namespace PaymentsGatewayApi.Application.Features.Payments.Queries.GetAllPayments;
 
-using PaymentsGatewayApi.Application.Common.Wrappers;
 using MediatR;
+using PaymentsGatewayApi.Application.Common.Wrappers;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

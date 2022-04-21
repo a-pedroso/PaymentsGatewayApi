@@ -1,7 +1,7 @@
 ﻿namespace PaymentsGatewayApi.Application.Features.Payments.Commands.CreatePayment;
 
-using PaymentsGatewayApi.Application.Common.Wrappers;
 using MediatR;
+using PaymentsGatewayApi.Application.Common.Wrappers;
 
 /// <summary>
 /// request sample: https://www.checkout.com/docs/payments/accept-payments/request-a-card-payment#Request_example

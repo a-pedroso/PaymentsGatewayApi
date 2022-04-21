@@ -1,7 +1,7 @@
 ﻿namespace PaymentsGatewayApi.Application.Features.Payments.Queries.GetPaymentById;
 
-using PaymentsGatewayApi.Application.Common.Wrappers;
 using MediatR;
+using PaymentsGatewayApi.Application.Common.Wrappers;
 using System;
 
 public class GetPaymentByIdQuery : IRequest<Result<PaymentDTO>>

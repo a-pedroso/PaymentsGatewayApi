@@ -1,11 +1,11 @@
 ﻿namespace PaymentsGatewayApi.Infrastructure.Persistence;
 
-using PaymentsGatewayApi.Application.Features.Payments;
-using PaymentsGatewayApi.Infrastructure.Persistence.Context;
-using PaymentsGatewayApi.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PaymentsGatewayApi.Application.Features.Payments;
+using PaymentsGatewayApi.Infrastructure.Persistence.Context;
+using PaymentsGatewayApi.Infrastructure.Persistence.Repositories;
 
 public static class DependencyInjection
 {

@@ -11,12 +11,12 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-public class PaymentRepository : IPaymentsRepository 
+public class PaymentRepository : IPaymentsRepository
 {
     private readonly DbSet<PaymentEFO> _payments;
     private readonly ApplicationDbContext _dbContext;
 
-    public PaymentRepository(ApplicationDbContext dbContext) 
+    public PaymentRepository(ApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
         _payments = dbContext.Set<PaymentEFO>();

@@ -4,7 +4,7 @@ using FluentValidation.TestHelper;
 using PaymentsGatewayApi.Application.Features.Payments.Queries.GetPaymentById;
 using Xunit;
 
-public  class GetPaymentByIdQueryValidatorTests : MediatorFixture
+public class GetPaymentByIdQueryValidatorTests : MediatorFixture
 {
     [Fact]
     public void GetPaymentByIdQueryValidator_HappyPath()

@@ -19,10 +19,5 @@ public class MediatorFixture
     protected MediatorFixture()
     {
         Fixture = new Fixture();
-
-        // Domain Fixtures
-        //Fixture.Register<PaymentCurrency>(() => PaymentCurrency.USD);
-        //Fixture.Register<PaymentStatus>(() => PaymentStatus.Authorized);
-        //Fixture.Register<PaymentSourceType>(() => PaymentSourceType.Card);
     }
 }

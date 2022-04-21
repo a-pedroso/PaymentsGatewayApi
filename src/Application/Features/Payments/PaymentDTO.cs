@@ -47,4 +47,3 @@ public record SourceDTO(
     string CvvCheck);
 
 public record CustomerDTO(string Id);
-

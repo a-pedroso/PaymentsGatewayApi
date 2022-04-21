@@ -1,11 +1,11 @@
 ﻿namespace PaymentsGatewayApi.WebApi.Extensions.StartupExtensions;
 
-using PaymentsGatewayApi.Application.Common.Exceptions;
 using FluentValidation;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using PaymentsGatewayApi.Application.Common.Exceptions;
 
 public static class ProblemDetailsExtension
 {

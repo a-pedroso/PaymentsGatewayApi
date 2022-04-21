@@ -1,11 +1,11 @@
 ﻿namespace PaymentsGatewayApi.Application.Features.Payments.Queries.GetPaymentById;
 
+using MediatR;
 using PaymentsGatewayApi.Application.Common.Exceptions;
 using PaymentsGatewayApi.Application.Common.Wrappers;
-using MediatR;
+using PaymentsGatewayApi.Domain.Entities;
 using System.Threading;
 using System.Threading.Tasks;
-using PaymentsGatewayApi.Domain.Entities;
 
 public class GetPaymentByIdQueryHandler : IRequestHandler<GetPaymentByIdQuery, Result<PaymentDTO>>
 {

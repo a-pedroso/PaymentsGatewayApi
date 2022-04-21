@@ -1,5 +1,6 @@
 ﻿namespace PaymentsGatewayApi.WebApi.Extensions;
 
+using Hellang.Middleware.ProblemDetails.Mvc;
 using PaymentsGatewayApi.Application;
 using PaymentsGatewayApi.Application.Common.Interfaces.Services;
 using PaymentsGatewayApi.Infrastructure.Persistence;
@@ -8,7 +9,6 @@ using PaymentsGatewayApi.Infrastructure.Shared;
 using PaymentsGatewayApi.WebApi.Extensions.StartupExtensions;
 using PaymentsGatewayApi.WebApi.Helpers;
 using PaymentsGatewayApi.WebApi.Services;
-using Hellang.Middleware.ProblemDetails.Mvc;
 using Prometheus.DotNetRuntime;
 using Serilog;
 

@@ -5,7 +5,7 @@ using PaymentsGatewayApi.Infrastructure.Persistence.Context.Entities;
 
 public static class PaymentExtensions
 {
-    public static PaymentEFO ToEFO (this Payment p)
+    public static PaymentEFO ToEFO(this Payment p)
     {
         return new PaymentEFO()
         {
@@ -21,7 +21,7 @@ public static class PaymentExtensions
             ResponseCode = p.ResponseCode,
             ResponseSummary = p.ResponseSummary,
             Risk = new RiskEFO() { Flagged = p.Risk.Flagged },
-            Source = new SourceEFO() 
+            Source = new SourceEFO()
             {
                 Id = p.Source.Id,
                 Type = p.Source.Type,

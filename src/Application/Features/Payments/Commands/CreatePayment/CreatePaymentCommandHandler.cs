@@ -1,13 +1,13 @@
 ﻿namespace PaymentsGatewayApi.Application.Features.Payments.Commands.CreatePayment;
 
+using MediatR;
+using PaymentsGatewayApi.Application.Common.Interfaces.Services;
 using PaymentsGatewayApi.Application.Common.Wrappers;
 using PaymentsGatewayApi.Domain.Entities;
-using MediatR;
+using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using System;
-using PaymentsGatewayApi.Application.Common.Interfaces.Services;
-using System.Collections.Generic;
 
 public class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentCommand, Result<PaymentDTO>>
 {
@@ -15,7 +15,7 @@ public class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentCommand,
     private readonly ICkoBankSimulator _ckoBankSimulator;
 
     public CreatePaymentCommandHandler(
-        IPaymentsRepository paymentsRepository, 
+        IPaymentsRepository paymentsRepository,
         ICkoBankSimulator ckoBankSimulator)
     {
         _paymentsRepository = paymentsRepository;

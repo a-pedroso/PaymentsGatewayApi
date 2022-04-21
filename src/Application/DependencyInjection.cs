@@ -1,9 +1,9 @@
 ﻿namespace PaymentsGatewayApi.Application;
 
-using PaymentsGatewayApi.Application.Common.Behaviours;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using PaymentsGatewayApi.Application.Common.Behaviours;
 using System.Reflection;
 
 public static class DependencyInjection

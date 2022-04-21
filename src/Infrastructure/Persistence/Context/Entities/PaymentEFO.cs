@@ -12,15 +12,15 @@ public class PaymentEFO : AuditableEntity
     public string Id { get; set; }
 
     public string ActionId { get; set; }
-    
+
     [Required]
     public int Amount { get; set; }
-    
+
     [Required]
     [MaxLength(3)]
     public string Currency { get; set; }
-    
-    [Required] 
+
+    [Required]
     public bool Approved { get; set; }
 
     [Required]
@@ -85,8 +85,8 @@ public class PaymentEFO : AuditableEntity
                        Source.ProductType,
                        Source.AvsCheck,
                        Source.CvvCheck),
-            new Customer(Customer.Id), 
-            ProcessedOn, 
+            new Customer(Customer.Id),
+            ProcessedOn,
             Reference);
     }
 }

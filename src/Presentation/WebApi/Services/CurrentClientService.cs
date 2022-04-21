@@ -1,7 +1,7 @@
 ﻿namespace PaymentsGatewayApi.WebApi.Services;
 
-using PaymentsGatewayApi.Application.Common.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
+using PaymentsGatewayApi.Application.Common.Interfaces.Services;
 using System.Linq;
 
 public class CurrentClientService : ICurrentClientService

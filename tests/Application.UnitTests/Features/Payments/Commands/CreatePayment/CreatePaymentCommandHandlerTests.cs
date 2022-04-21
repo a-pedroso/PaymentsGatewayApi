@@ -5,12 +5,11 @@ using Moq;
 using PaymentsGatewayApi.Application.Common.Interfaces.Services;
 using PaymentsGatewayApi.Application.Features.Payments.Commands.CreatePayment;
 using PaymentsGatewayApi.Domain.Entities;
-using System;
 using System.Threading.Tasks;
 using Xunit;
 
 
-public  class CreatePaymentCommandHandlerTests : MediatorFixture
+public class CreatePaymentCommandHandlerTests : MediatorFixture
 {
     [Fact]
     public async Task CreatePaymentAsync_HappyPath()

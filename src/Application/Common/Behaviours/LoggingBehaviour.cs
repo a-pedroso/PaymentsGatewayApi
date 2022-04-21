@@ -1,8 +1,8 @@
 ﻿namespace PaymentsGatewayApi.Application.Common.Behaviours;
 
-using PaymentsGatewayApi.Application.Common.Interfaces.Services;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
+using PaymentsGatewayApi.Application.Common.Interfaces.Services;
 using System.Threading;
 using System.Threading.Tasks;
 
