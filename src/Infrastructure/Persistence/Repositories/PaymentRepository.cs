@@ -7,6 +7,7 @@ using PaymentsGatewayApi.Domain.Entities;
 using PaymentsGatewayApi.Infrastructure.Persistence.Context;
 using PaymentsGatewayApi.Infrastructure.Persistence.Context.Entities;
 using PaymentsGatewayApi.Infrastructure.Persistence.DomainExtensions;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,10 +26,15 @@ public class PaymentRepository : IPaymentsRepository
     {
         PaymentEFO efo = entity.ToEFO();
 
+        efo.Id = $"pay_{Guid.NewGuid():N}";
+        efo.ActionId = $"act_{Guid.NewGuid():N}";
+        efo.Source.Id = $"src_{Guid.NewGuid():N}";
+        efo.Customer.Id = $"cus_{Guid.NewGuid():N}";
+
         await _payments.AddAsync(efo);
         await _dbContext.SaveChangesAsync();
 
-        return entity;
+        return efo?.ToDomainEntity();
     }
 
     public async Task<Payment> GetByIdAsync(string id)

@@ -81,7 +81,7 @@ public static class OpenTelemetryExtension
     {
         if (webHostEnvironment.IsDevelopment())
         {
-            builder.AddConsoleExporter(options => options.Targets = ConsoleExporterOutputTargets.Debug);
+            builder.AddConsoleExporter();
         }
 
         return builder;

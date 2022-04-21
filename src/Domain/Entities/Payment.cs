@@ -46,7 +46,7 @@ public record Payment : BaseEntity<string>
     }
 
     public override string Id { get; init; }
-    public string ActionId { get; init; } = $"act_{Guid.NewGuid():N}";
+    public string ActionId { get; init; }
     public int Amount { get; init; }
     public PaymentCurrency Currency { get; init; }
     public bool Approved { get; init; }

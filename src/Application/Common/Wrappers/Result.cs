@@ -68,11 +68,6 @@ public class Result<T> : Result
     {
         get
         {
-            if (IsFailure)
-            {
-                throw new InvalidOperationException();
-            }
-
             return _data;
         }
     }

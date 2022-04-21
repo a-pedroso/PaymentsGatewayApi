@@ -32,9 +32,9 @@ public class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentCommand,
                                                                                      request.Source.ExpiryYear);
         Payment payment = BuildPaymentEntity(request, bankResponse);
 
-        await _paymentsRepository.AddAsync(payment);
+        var addedPayment = await _paymentsRepository.AddAsync(payment);
 
-        PaymentDTO dto = payment.ToDTO();
+        PaymentDTO dto = addedPayment.ToDTO();
 
         return bankResponse.Approved
                ? Result.Ok(dto)
@@ -53,8 +53,8 @@ public class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentCommand,
     private static Payment BuildPaymentEntity(CreatePaymentCommand request, CkoBankSimulatorResponse bankResponse)
     {
         return new Payment(
-                        id: $"pay_{Guid.NewGuid():N}",
-                        actionId: $"act_{Guid.NewGuid():N}",
+                        id: string.Empty,
+                        actionId: string.Empty,
                         request.Amount,
                         (PaymentCurrency)request.Currency,
                         bankResponse.Approved,
@@ -64,10 +64,9 @@ public class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentCommand,
                         bankResponse.SchemeId,
                         bankResponse.ResponseCode,
                         bankResponse.ResponseSummary,
-                        new Risk(
-                            bankResponse.Flagged),
+                        new Risk(bankResponse.Flagged),
                         new Source(
-                            id: $"src_{Guid.NewGuid():N}",
+                            id: string.Empty,
                             PaymentSourceType.Card,
                             bankResponse.ExpiryMonth,
                             bankResponse.ExpiryYear,
@@ -83,8 +82,7 @@ public class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentCommand,
                             bankResponse.ProductType,
                             bankResponse.AvsCheck,
                             bankResponse.CvvCheck),
-                        new Customer(
-                            id: $"cus_{Guid.NewGuid():N}"),
+                        new Customer(id: string.Empty),
                         bankResponse.ProcessedOn,
                         request.Reference);
     }

@@ -40,7 +40,7 @@ public record Source
         CvvCheck = cvvCheck;
     }
 
-    public string Id { get; init; } = $"src_{Guid.NewGuid():N}";
+    public string Id { get; init; }
     public PaymentSourceType Type { get; init; }
     public int ExpiryMonth { get; init; }
     public int ExpiryYear { get; init; }
