@@ -19,7 +19,7 @@ public class CreatePaymentCommandValidator : AbstractValidator<CreatePaymentComm
             .NotEmpty()
                 .WithMessage("{PropertyName} is required.")
             .MustAsync(IsValidCurrency)
-                .WithMessage("{PropertyName} invalid value.");
+                .WithMessage("{PropertyName} invalid currency.");
 
         RuleFor(r => r.Reference)
             .NotEmpty()
@@ -27,62 +27,40 @@ public class CreatePaymentCommandValidator : AbstractValidator<CreatePaymentComm
 
         RuleFor(r => r.Metadata)
             .NotNull()
-                .WithMessage("{PropertyName} is required.");
+                .WithMessage("{PropertyName} is required.")
+            .SetValidator(new CreatePaymentCommandMetadataValidator());
 
-        RuleFor(r => r.Metadata.CouponCode)
+        RuleFor(r => r.Source)
+            .NotNull()
+                .WithMessage("{PropertyName} is required.")
+            .SetValidator(new CreatePaymentCommandSourceValidator());
+    }
+
+    private async Task<bool> IsValidCurrency(string currency, CancellationToken cancellationToken)
+    {
+        bool isValid = PaymentCurrency.List().ToList().Contains((PaymentCurrency)currency);
+
+        return await Task.FromResult(isValid);
+    }
+}
+
+public class CreatePaymentCommandMetadataValidator : AbstractValidator<CreatePaymentCommandMetadata>
+{
+    public CreatePaymentCommandMetadataValidator()
+    {
+        RuleFor(r => r.CouponCode)
             .NotEmpty()
                 .WithMessage("{PropertyName} is required.");
 
-        RuleFor(r => r.Metadata.PartnerId)
+        RuleFor(r => r.PartnerId)
             .GreaterThan(0)
                 .WithMessage("{PropertyName} has to be greater then zero")
             .MustAsync(IsValidPartnerId)
                 .WithMessage("{PropertyName} invalid partner.");
 
-        RuleFor(r => r.Metadata.Udf1)
+        RuleFor(r => r.Udf1)
             .NotEmpty()
                 .WithMessage("{PropertyName} is required.");
-
-        RuleFor(r => r.Source)
-            .NotNull()
-                .WithMessage("{PropertyName} is required.");
-
-        RuleFor(r => r.Source.Type)
-            .NotEmpty()
-                .WithMessage("{PropertyName} is required.")
-            .MustAsync(IsValidSourceType)
-                .WithMessage("{PropertyName} invalid value.");
-
-        RuleFor(r => r.Source.Token)
-            .NotEmpty()
-            .When(r => r.Source.Type.Equals(PaymentSourceType.Token.ToString(), StringComparison.InvariantCultureIgnoreCase))
-                .WithMessage("{PropertyName} is required.");
-
-        RuleFor(r => r.Source.CardNumber)
-            .MustAsync(IsValidCardNumber)
-            .When(r => r.Source.Type.Equals(PaymentSourceType.Card.ToString(), StringComparison.InvariantCultureIgnoreCase))
-                .WithMessage("{PropertyName} is invalid.");
-
-        RuleFor(r => r.Source.Cvv)
-            .InclusiveBetween(100, 999)
-            .When(r => r.Source.Type.Equals(PaymentSourceType.Card.ToString(), StringComparison.InvariantCultureIgnoreCase))
-                .WithMessage("{PropertyName} is required. valid values between 100 and 999");
-
-        RuleFor(r => r.Source.ExpiryMonth)
-            .InclusiveBetween(1, 12)
-            .When(r => r.Source.Type.Equals(PaymentSourceType.Card.ToString(), StringComparison.InvariantCultureIgnoreCase))
-                .WithMessage("{PropertyName} is required. Valid value between 1 and 12");
-
-        RuleFor(r => r.Source.ExpiryYear)
-            .GreaterThanOrEqualTo(DateTime.UtcNow.Year)
-            .When(r => r.Source.Type.Equals(PaymentSourceType.Card.ToString(), StringComparison.InvariantCultureIgnoreCase))
-                .WithMessage("{PropertyName} is required. Valid value Greater or equal of current year");
-    }
-
-    private async Task<bool> IsValidCurrency(string currency, CancellationToken cancellationToken)
-    {
-        //TODO: validation 
-        return await Task.FromResult(true);
     }
 
     private async Task<bool> IsValidPartnerId(int partnerId, CancellationToken cancellationToken)
@@ -90,11 +68,51 @@ public class CreatePaymentCommandValidator : AbstractValidator<CreatePaymentComm
         //TODO: validation -> access partner service to validate if the partner is active
         return await Task.FromResult(true);
     }
+}
+
+public class CreatePaymentCommandSourceValidator : AbstractValidator<CreatePaymentCommandSource>
+{
+    public CreatePaymentCommandSourceValidator()
+    {
+        RuleFor(r => r.Type)
+            .NotEmpty()
+                .WithMessage("{PropertyName} is required.")
+            .MustAsync(IsValidSourceType)
+                .WithMessage("{PropertyName} invalid source type.");
+
+        RuleFor(r => r.Token)
+            .NotEmpty()
+            .When(r => r.Type.Equals(PaymentSourceType.Token.ToString(), StringComparison.InvariantCultureIgnoreCase))
+                .WithMessage("{PropertyName} is required.");
+
+        RuleFor(r => r.CardNumber)
+            .MustAsync(IsValidCardNumber)
+            .When(r => r.Type.Equals(PaymentSourceType.Card.ToString(), StringComparison.InvariantCultureIgnoreCase))
+                .WithMessage("{PropertyName} is invalid.");
+
+        RuleFor(r => r.Cvv)
+            .InclusiveBetween(100, 999)
+            .When(r => r.Type.Equals(PaymentSourceType.Card.ToString(), StringComparison.InvariantCultureIgnoreCase))
+                .WithMessage("{PropertyName} is required. valid values between 100 and 999");
+
+        RuleFor(r => r.ExpiryMonth)
+            .InclusiveBetween(1, 12)
+            .When(r => r.Type.Equals(PaymentSourceType.Card.ToString(), StringComparison.InvariantCultureIgnoreCase))
+                .WithMessage("{PropertyName} is required. Valid value between 1 and 12");
+
+        RuleFor(r => r.ExpiryYear)
+            .GreaterThanOrEqualTo(DateTime.UtcNow.Year)
+            .When(r => r.Type.Equals(PaymentSourceType.Card.ToString(), StringComparison.InvariantCultureIgnoreCase))
+                .WithMessage("{PropertyName} is required. Valid value Greater or equal of current year");
+    }
 
     private async Task<bool> IsValidSourceType(string sourceType, CancellationToken cancellationToken)
     {
         //TODO: validation 
-        return await Task.FromResult(true);
+
+        bool isValid = PaymentSourceType.List().ToList().Contains((PaymentSourceType)sourceType);
+
+        return await Task.FromResult(isValid);
     }
 
     private async Task<bool> IsValidCardNumber(long cardNumber, CancellationToken cancellationToken)

@@ -33,9 +33,9 @@ execute some actions on API in order to have some metrics, logs and tracing.
 
 | WebPage       | Link          | Username         | Password      |
 | ------------- |---------------|:-------------:|:-------------:|
-| API - Swagger | https://localhost:5001/swagger/index.html | m2m | secret |
-| API - Metrics | https://localhost:5001/metrics      | - | - |
-| API - Health | https://localhost:5001/health       | - | - |
+| API - Swagger | http://localhost:5000/swagger/index.html | m2m | secret |
+| API - Metrics | http://localhost:5000/metrics      | - | - |
+| API - Health | http://localhost:5000/health       | - | - |
 | Seq           | http://localhost:5341/ | - | - |
 | Grafana       | http://localhost:3000/ | admin | admin |
 | Grafana - Metrics Dashboard       | http://localhost:3000/d/zyAf4i4Zz2/prometheus-net | - | - |

@@ -1,8 +1,10 @@
 ﻿namespace PaymentsGatewayApi.WebApi.Extensions;
 
+using FluentValidation.AspNetCore;
 using Hellang.Middleware.ProblemDetails.Mvc;
 using PaymentsGatewayApi.Application;
 using PaymentsGatewayApi.Application.Common.Interfaces.Services;
+using PaymentsGatewayApi.Application.Features.Payments.Commands.CreatePayment;
 using PaymentsGatewayApi.Infrastructure.Persistence;
 using PaymentsGatewayApi.Infrastructure.Persistence.Context;
 using PaymentsGatewayApi.Infrastructure.Shared;
@@ -44,6 +46,7 @@ public static class ProgramExtensions
         builder.Services.AddEndpointsApiExplorer();
 
         builder.Services.AddControllers()
+                        .AddFluentValidation()
                         .AddProblemDetailsConventions();
 
         builder.Services.AddRouting(options => options.LowercaseUrls = true);
@@ -82,7 +85,8 @@ public static class ProgramExtensions
 
         app.UseHealthChecksExtension();
 
-        app.MapControllers().RequireAuthorization();
+        app.MapControllers()
+           .RequireAuthorization();
     }
 
     public static async Task RunMigrationsAsync(this WebApplication app)
